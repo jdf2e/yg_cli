@@ -6,7 +6,7 @@ socket.on('connect', function () {
     console.log("connected");
     socket.emit("runshell", {
         id: "aaaa-aaa-aaa3322",
-        cmd: ["cd"],
+        cmd: ["rm","-f","xxx.txt"],
     })
 
 });
