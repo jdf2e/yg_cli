@@ -6,10 +6,10 @@ socket.on('connect', function () {
     console.log("connected");
     socket.emit("runshell", {
         id: "aaaa-aaa-aaa3322",
-        cmd: ["cd"],
+        cmd: ["hs"],
     })
-
 });
+
 socket.on('msg', function (data) {
     console.log(data);
 });
