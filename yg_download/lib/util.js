@@ -24,17 +24,6 @@ const util = {
     sysTempDir: "",
     currentFolder: "",
 
-    saveYgConfig() {
-        let cfg = {
-            puuid:util.ygConfig.puuid,
-            port:util.ygConfig.port,
-            nv:util.ygConfig.nv,
-            outerPort:util.ygConfig.outerPort,
-        };
-   
-        fs.writeFileSync(util.ygConfigPath, JSON.stringify(cfg, null, 2), "utf-8");
-    },
-
     cmdArgs(argsArr) {
         if (argsArr.length <= 0 || argsArr[0] == "-h" || argsArr[0] == "-help") {
             util.help();
@@ -67,35 +56,15 @@ const util = {
             if (v == "-d") {
                 util.ygConfig.d = ygConfigArgs[i + 1];
             }
-            if (v == "-open") {
-                util.ygConfig.open = true;
-            }
-            if (v == "-i") {
-                util.ygConfig.i = true;
-            }
         });
 
-        // 打开浏览器 open
-        if (util.ygConfig.open) {
-            opn(`http://yg.jd.com/export/yg_src/${util.ygConfig.puuid}`);
-            opn(`http://yg.jd.com:${util.ygConfig.outerPort}`);
-            return;
-        }
-
-
-        //download 
         if (util.ygConfig.d) {
             util.download(util.ygConfig.d).then(d => {
-                //process.exit();
+                process.exit();
             });
-            return;
         }
 
-        // show info
-        if (util.ygConfig.i) {
-            console.log(util.ygConfig);
-            return;
-        }
+
 
         //console.log(ygConfigArgs);
         //console.log(userConfigArgs);
@@ -103,8 +72,9 @@ const util = {
         const socket = util.socket = io('http://yg.jd.com');
 
         socket.on('connect', function () {
-            //console.log("socket connected.");
-            util.saveYgConfig();
+            console.log("socket connected.");
+            fs.writeFileSync(util.ygConfigPath, JSON.stringify(util.ygConfig, null, 2), "utf-8");
+
             if (userConfigArgs.length > 0) {
                 let f = path.join(util.currentFolder, util.ygConfig.puuid + '.tgz');
                 util.tarFolder(util.currentFolder, f).then(d => {
@@ -122,12 +92,6 @@ const util = {
             util.startWatch();
         });
 
-        socket.on('receive', function (data) {
-            Object.assign(util.ygConfig, data);
-            util.saveYgConfig();
-            console.log(data.outerPort);
-        });
-
         socket.on('msg', function (data) {
             console.log(data);
         });
@@ -139,9 +103,7 @@ const util = {
             console.log(data);
         });
 
-        socket.on('disconnect', function () {
-            process.exit();
-        });
+        socket.on('disconnect', function () {});
     },
 
     addignore() {
@@ -203,7 +165,7 @@ const util = {
     },
 
     help() {
-        console.log("云构参数:");
+        console.log("yg:");
         console.log("   -nv    指定运行的 nodejs 版本，当前支持：6.14.3 |  8.11.3  |  10.5.0");
         console.log("   -p     指定运行时，平台自动对接的本地端口号，默认为 8080");
 
@@ -247,20 +209,12 @@ const util = {
 
     download(folder = "") {
         return new Promise((resolve, reject) => {
-            shelljs.mkdir("-p", util.sysTempDir);
-            let targetFile = path.join(util.sysTempDir, util.ygConfig.puuid + ".tgz");
+            shelljs.mkdir("-p", uti.sysTempDir);
+            let targetFile = path.join(uti.sysTempDir, util.ygConfig.puuid + ".tgz");
             request(`http://yg.jd.com/download?puuid=${util.ygConfig.puuid}&folder=${folder}`).pipe(
                 fs.createWriteStream(targetFile).on("finish", function (e) {
-                    let ygDownloadFolder = path.join(util.currentFolder, "yg_download");
-                    shelljs.mkdir("-p", ygDownloadFolder);
-                    tar.x({
-                        file: targetFile,
-                        C: ygDownloadFolder
-                    }).then(d => {
-                        console.log("download finished ", folder);
-                        resolve(folder);
-                    });
-
+                    console.log("download finished ", folder);
+                    resolve(folder);
                 })
             );
         });
