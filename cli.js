@@ -9,7 +9,6 @@ const tar = require("tar");
 const request = require("request");
 const watch = require('node-watch');
 const os = require("os");
-const opn = require('opn');
 const kill = require('tree-kill');
 const util = require('./lib/util');
 const jdf = require('./lib/jdf');
