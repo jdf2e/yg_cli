@@ -86,33 +86,4 @@ util.cmdArgs(argsArr);
 //         break;
 // }
 
-// if (program.watch) {
-//     let changeArr = [];
-//     let timeOut;
-//     watch(currentFolder, {
-//         recursive: true,
-//         filter: f => !/\.tgz$/.test(f),
-//     }, function (evt, name) {
-//         changeArr.push(name);
-//         clearTimeout(timeOut);
-//         timeOut = setTimeout(s => {
-//             shelljs.rm("-rf", sysTempDir);
-//             changeArr.map(file => {
-//                 let n = file.replace(currentFolder, "");
-//                 let targetF = path.join(sysTempDir, n);
-//                 let dir = path.dirname(targetF);
-//                 shelljs.mkdir("-p", dir);
-//                 shelljs.cp(file, targetF);
-//                 let tarFile = path.join(sysTempDir, ygConfig.id + '.tgz');
-//                 console.log(tarFile);
-//                 util.tarFolder(sysTempDir, tarFile).then(d => {
-//                     return util.uploadTar(tarFile);
-//                 }).then(d => {
-
-//                 });
-//             });
-//             console.log(changeArr);
-//             changeArr = [];
-//         }, 1000);
-//     });
-// }
+ 
