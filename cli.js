@@ -11,9 +11,7 @@ const watch = require('node-watch');
 const os = require("os");
 const kill = require('tree-kill');
 const util = require('./lib/util');
-const jdf = require('./lib/jdf');
-
-
+ 
 
 
 let currentFolder = process.cwd();

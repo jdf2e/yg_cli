@@ -16,10 +16,16 @@
 
 // socket.on('disconnect', function () {});
 
-const request = require("request");
-const fs = require("fs");
-request(`http://localhost/download?puuid=da0265b9-c431-486d-bf4b-4e0a77a1397c&folder=test`).pipe(
-    fs.createWriteStream("a.tgz").on("finish", function (e) {
-        console.log("findish")
-    })
-);
+// const request = require("request");
+// const fs = require("fs");
+// request(`http://localhost/download?puuid=da0265b9-c431-486d-bf4b-4e0a77a1397c&folder=test`).pipe(
+//     fs.createWriteStream("a.tgz").on("finish", function (e) {
+//         console.log("findish")
+//     })
+// );
+
+var open = require("open");
+open("https://www.jd.com" );
+
+console.log(open);
+
