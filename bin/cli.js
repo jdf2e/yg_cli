@@ -2,7 +2,7 @@
 
 const yargs = require('yargs');
 
-function noop () {}
+function noop() {}
 
 function checkMiddleware(argv) {
   console.log('before command', argv);
@@ -18,7 +18,10 @@ yargs
 
 .command('npm', '中转npm scripts命令')
 
-.command('init <parserName>', '初始化工程，生成.ygconfig')
+.command('init <parserName>', '初始化工程，生成.ygconfig', noop, (argv) => {
+  const init = require('../lib/init');
+  init.init(argv);
+})
 
 .command('cli-list', '编译器列表', function (yargs) {
   yargs.reset()
@@ -26,10 +29,16 @@ yargs
     alias: 'a',
     describe: '展示所有编译器列表',
     type: 'boolean'
-  })
+  });
+}, (argv) => {
+  const nmparser = require('../lib/nmparser');
+  nmparser.list(argv);
 })
 
-.command('cli-check <parserName>', '检查编译器是否存在或正常工作')
+.command('cli-check <parserName>', '检查编译器是否存在或正常工作', noop, (argv) => {
+  const nmparser = require('../lib/nmparser');
+  nmparser.check(argv);
+})
 
 .command('cli-freeze <parserName>', '固化当前使用的环境为新编译器', function (yargs) {
   yargs.reset()
@@ -62,7 +71,7 @@ yargs
         type: 'string',
         describe: '自定义脚手架名称',
         demand: true
-      })
+      });
     })
     .command('list', '展示脚手架列表，默认是系统提供的脚手架', function (yargs) {
       yargs.reset()
@@ -70,7 +79,7 @@ yargs
         alias: 'a',
         type: 'boolean',
         describe: '查看所有脚手架'
-      })
+      });
     }, (argv) => {
       const template = require('../lib/template');
       template.list(argv);
@@ -79,7 +88,7 @@ yargs
 
 .command('connect [ip]', '切换云服务器，不输入ip则查看当前连接的云服务器')
 
-.command('use', )
+.command('use', '')
 
 .option('n', {
   alias: 'name',

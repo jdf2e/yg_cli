@@ -11,8 +11,6 @@ const watch = require('node-watch');
 const os = require("os");
 const kill = require('tree-kill');
 const util = require('./lib/util');
- 
-
 
 let currentFolder = process.cwd();
 let ygConfig = {};
@@ -36,9 +34,6 @@ util.currentFolder = currentFolder;
 
 let argsArr = process.argv.slice(2);
 util.cmdArgs(argsArr);
-
-
-
 
 // program
 //     .version('0.1.0')
@@ -73,14 +68,8 @@ util.cmdArgs(argsArr);
 
 // program.cmd = program.cmd || "output";
 
-
-
-
-
 // switch (ygConfig.platform) {
 //     case "jdf":
 //         jdf.run();
 //         break;
 // }
-
- 
