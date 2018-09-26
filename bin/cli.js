@@ -45,7 +45,10 @@ yargs
 
 .command('template <options>', '脚手架模板管理', function (yargs) {
   yargs.reset()
-    .command('clone <name>', '使用指定脚手架模板作为项目模板')
+    .command('clone <name>', '使用指定脚手架模板作为项目模板', noop, (argv) => {
+      const template = require('../lib/template');
+      template.clone(argv);
+    })
     .command('upload', '上传脚手架', function (yargs) {
       yargs.reset()
       .option('path', {
@@ -68,7 +71,10 @@ yargs
         type: 'boolean',
         describe: '查看所有脚手架'
       })
-    })
+    }, (argv) => {
+      const template = require('../lib/template');
+      template.list(argv);
+    });
 })
 
 .command('connect [ip]', '切换云服务器，不输入ip则查看当前连接的云服务器')
@@ -94,7 +100,7 @@ yargs
 .epilog('copyright jdc_fe');
 
 yargs.parse(process.argv.slice(2), function (err, argv, output) {
-  console.log(err)
-  console.log(argv)
-  console.log(output)
+  if (err) {
+    console.log(err.message);
+  }
 });

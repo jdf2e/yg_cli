@@ -5,9 +5,10 @@ parser_path: 编译器存放路径
 
 
 # 独立配置
-host: 服务器地址，cli默认集成一个，.ygconfig里也可配置一个
+domain: 服务器地址，cli默认集成一个，.ygconfig里也可配置一个，ip、域名均ok
 uuid: 项目远端uuid
 parser_name: 项目采用的编译器名，如果没有uuid，那么创建新运行环境时就需要它来引入编译器
 template_name: 项目采用模板名，这个字段更多的是一个参考作用，因为项目开发人员可能在中途修改项目结构，而一同开发的会从git拉取项目代码
 inner_port: 内部端口，也就是webpack或者jdf运行时的端口，docker内部的端口
 visit_port: 访问端口，从浏览器访问到的端口，宿主机上的端口，如果指定的端口被占用，那么会另外选取一个，并传递到客户端显示
+node_version: node运行版本

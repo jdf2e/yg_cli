@@ -1,2 +1,6 @@
 # CS通信协议，是为了后续能更容易的展示在不同的终端，比如terminal，vs code插件等地方
-command: 原始命令
+# 客户端服务端公用一套eventconsts
+cmd: eventconsts里的命令
+options: 客户端带过来的命令行参数，原始数据
+args: # 服务器端返回过来的参数
+  isErr: 是否报错，可扩展报错类型

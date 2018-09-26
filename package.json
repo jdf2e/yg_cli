@@ -24,7 +24,9 @@
     "shelljs": "^0.8.2",
     "socket.io": "^2.1.1",
     "socket.io-client": "^2.1.1",
+    "socket.io-stream": "^0.9.1",
     "tar": "^4.4.4",
+    "tar-fs": "^1.16.3",
     "tree-kill": "^1.2.0",
     "uuid": "^3.2.1",
     "yargs": "^12.0.2"
