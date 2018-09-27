@@ -38,6 +38,7 @@ const trueCase = [
   'node_modules/react/package.json',
   'Thumbs/whate/c.doc',
   'DS_Store/aaaa',
+  '.DS_Store',
 
   'a.dll',
   'src/app/index.exe',
