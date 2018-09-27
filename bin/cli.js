@@ -14,7 +14,10 @@ yargs
   console.log('excute some build action')
 }, [checkMiddleware])
 
-.command('start', '启动web服务，热更新开发，映射到npm run dev')
+.command('start', '启动web服务，热更新开发，映射到npm run dev', noop, (argv) => {
+  const start = require('../lib/start');
+  start.start(argv);
+})
 
 .command('npm', '中转npm scripts命令')
 
@@ -46,11 +49,13 @@ yargs
     alias: 'force',
     describe: '如果已存在，仍旧强制覆盖固化',
     type: 'boolean'
-  })
+  });
 })
 
-.command('cli-use <parserName>', '当前工程切换编译器')
-
+.command('cli-use <parserName>', '当前工程切换编译器', noop, (argv) => {
+  const init = require('../lib/init');
+  init.init(argv);
+})
 
 .command('template <options>', '脚手架模板管理', function (yargs) {
   yargs.reset()

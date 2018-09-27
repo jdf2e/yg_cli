@@ -18,6 +18,7 @@
   "dependencies": {
     "commander": "^2.15.1",
     "inquirer": "^6.2.0",
+    "minimatch": "^3.0.4",
     "node-watch": "^0.5.8",
     "open": "0.0.5",
     "opn": "^5.3.0",
