@@ -19,7 +19,10 @@ yargs
   start.start(argv);
 })
 
-.command('npm', '中转npm scripts命令')
+.command('npm', '中转npm scripts命令', noop, (argv) => {
+  const npm = require('../lib/npm');
+  npm.exec(argv);
+})
 
 .command('init <parserName>', '初始化工程，生成.ygconfig', noop, (argv) => {
   const init = require('../lib/init');
