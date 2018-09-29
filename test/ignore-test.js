@@ -42,7 +42,12 @@ const trueCase = [
 
   'a.dll',
   'src/app/index.exe',
-  'user/man.exe'
+  'user/man.exe',
+
+  'node-watch-1eabdadf',
+  'node-watch-1adff/adbadc',
+  'node-watch-1adjn/aab/c.log',
+  'node-watch-1adjn/node-watch-abadf'
 ].map(item => path.resolve(__dirname, item));
 
 // trueResult全true

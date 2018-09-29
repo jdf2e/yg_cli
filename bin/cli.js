@@ -11,7 +11,8 @@ function checkMiddleware(argv) {
 yargs
 
 .command('build', '编译并下载编译后的文件到本地dist目录', noop, function (argv) {
-  console.log('excute some build action')
+  const build = require('../lib/build');
+  build.exec(argv);
 }, [checkMiddleware])
 
 .command('start', '启动web服务，热更新开发，映射到npm run dev', noop, (argv) => {
@@ -48,11 +49,13 @@ yargs
 
 .command('cli-freeze <parserName>', '固化当前使用的环境为新编译器', function (yargs) {
   yargs.reset()
-  .options('f', {
-    alias: 'force',
+  .options('force', {
     describe: '如果已存在，仍旧强制覆盖固化',
     type: 'boolean'
   });
+}, (argv) => {
+  const nmparser = require('../lib/nmparser');
+  nmparser.freeze(argv);
 })
 
 .command('cli-use <parserName>', '当前工程切换编译器', noop, (argv) => {
@@ -94,7 +97,20 @@ yargs
     });
 })
 
-.command('connect [ip]', '切换云服务器，不输入ip则查看当前连接的云服务器')
+.command('connect [ip]', '切换云服务器，不输入ip则查看当前连接的云服务器', noop, (argv) => {
+  const fs = require('fs');
+  const path = require('path');
+  const ygconfig = require('../lib/ygconfig').ygconfig;
+  const ygconfigFile = path.resolve(process.cwd(), '.ygconfig');
+  if (argv.ip) {
+    // todo 校验ip或域名的合法性
+    ygconfig.domain = argv.ip;
+    fs.writeFileSync(ygconfigFile, JSON.stringify(ygconfig, null, 2));
+    console.log('新连接的云服务地址为：', argv.ip);
+  } else {
+    console.log('当前云服务地址为：', ygconfig.domain);
+  }
+})
 
 .command('use', '')
 
