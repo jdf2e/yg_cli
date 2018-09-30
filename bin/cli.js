@@ -8,7 +8,7 @@ function checkMiddleware(argv) {
   console.log('before command', argv);
 }
 
-yargs
+const exec = yargs
 
 .command('build', '编译并下载编译后的文件到本地dist目录', noop, function (argv) {
   const build = require('../lib/build');
@@ -63,6 +63,11 @@ yargs
   init.init(argv);
 })
 
+.command('cli-remove', '清除当前工程的编译器', noop, (argv) => {
+  const nmparser = require('../lib/nmparser');
+  nmparser.remove(argv);
+})
+
 .command('template <options>', '脚手架模板管理', function (yargs) {
   yargs.reset()
     .command('clone <name>', '使用指定脚手架模板作为项目模板', noop, (argv) => {
@@ -112,28 +117,19 @@ yargs
   }
 })
 
-.command('use', '')
+.command('clean', '清除服务端的缓存文件', noop, (argv) => {
+  const clean = require('../lib/clean');
+  clean.clean(argv);
+})
 
-.option('n', {
-  alias: 'name',
-  demand: false,
-  describe: 'get name',
-  type: 'string'
-})
-.option('f', {
-  alias: 'find',
-  demand: false,
-  describe: 'ok',
-  type: 'string'
-})
-.usage('Usage: hello [options]')
-.example('yg -n ldspirit', 'say hellow to ldspirit')
+.usage('Usage: yg <command> [options]')
+.alias('v', 'version')
 .help('h')
 .alias('h', 'help')
-.epilog('copyright jdc_fe');
+.epilog('copyright jdc_fe').argv;
 
-yargs.parse(process.argv.slice(2), function (err, argv, output) {
-  if (err) {
-    console.log(err.message);
-  }
-});
+// yargs.parse(process.argv.slice(2), function (err, argv, output) {
+//   if (err) {
+//     console.log(err.message);
+//   }
+// });
