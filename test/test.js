@@ -24,8 +24,24 @@
 //     })
 // );
 
-var open = require("open");
-open("https://www.jd.com" );
+// var open = require("open");
+// open("https://www.jd.com" );
 
-console.log(open);
+// console.log(open);
 
+// const argv = require('yargs')
+// .default('dirname', process.cwd())
+// .command('build', '编译并下载编译后的文件到本地dist目录', function(){}, function (argv) {
+//     console.info('build',argv)
+//   })
+//   .command('abc', 'ABC', function(argv){
+//     argv.reset()
+//     .options('all', {
+//       alias: 'a',
+//       describe: '展示所有编译器列表',
+//       type: 'boolean'
+//     });
+//   }, function (argv) {
+//     console.info('abc', argv)
+//   })
+//   .argv

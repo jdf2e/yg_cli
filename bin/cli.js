@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 const yargs = require('yargs');
-
 function noop() {}
 
 function checkMiddleware(argv) {
@@ -9,6 +8,7 @@ function checkMiddleware(argv) {
 }
 
 const exec = yargs
+.default('dirname', process.cwd())
 
 .command('build', '编译并下载编译后的文件到本地dist目录', noop, function (argv) {
   const build = require('../lib/build');
@@ -105,8 +105,8 @@ const exec = yargs
 .command('connect [ip]', '切换云服务器，不输入ip则查看当前连接的云服务器', noop, (argv) => {
   const fs = require('fs');
   const path = require('path');
-  const ygconfig = require('../lib/ygconfig').ygconfig;
-  const ygconfigFile = path.resolve(process.cwd(), '.ygconfig');
+  const ygconfig = require('../lib/ygconfig')(argv).ygconfig;
+  const ygconfigFile = path.resolve(argv.dirname, '.ygconfig');
   if (argv.ip) {
     // todo 校验ip或域名的合法性
     ygconfig.domain = argv.ip;
@@ -126,7 +126,7 @@ const exec = yargs
 .alias('v', 'version')
 .help('h')
 .alias('h', 'help')
-.epilog('copyright jdc_fe').argv;
+.epilog('copyright jdc_arch').argv;
 
 // yargs.parse(process.argv.slice(2), function (err, argv, output) {
 //   if (err) {
