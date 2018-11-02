@@ -45,3 +45,6 @@
 //     console.info('abc', argv)
 //   })
 //   .argv
+
+// const yg = require('../index')
+// yg.start({dirname:'d:/test'})

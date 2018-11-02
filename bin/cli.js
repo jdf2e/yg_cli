@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const yargs = require('yargs');
+const yg = require('../index')
 function noop() {}
 
 function checkMiddleware(argv) {
@@ -11,23 +12,19 @@ const exec = yargs
 .default('dirname', process.cwd())
 
 .command('build', '编译并下载编译后的文件到本地dist目录', noop, function (argv) {
-  const build = require('../lib/build');
-  build.exec(argv);
+  yg.build(argv);
 }, [checkMiddleware])
 
 .command('start', '启动web服务，热更新开发，映射到npm run dev', noop, (argv) => {
-  const start = require('../lib/start');
-  start.start(argv);
+  yg.start(argv);
 })
 
 .command('npm', '中转npm scripts命令', noop, (argv) => {
-  const npm = require('../lib/npm');
-  npm.exec(argv);
+  yg.npm(argv);
 })
 
 .command('init <parserName>', '初始化工程，生成.ygconfig', noop, (argv) => {
-  const init = require('../lib/init');
-  init.init(argv);
+  yg.init(argv);
 })
 
 .command('cli-list', '编译器列表', function (yargs) {
@@ -38,13 +35,11 @@ const exec = yargs
     type: 'boolean'
   });
 }, (argv) => {
-  const nmparser = require('../lib/nmparser');
-  nmparser.list(argv);
+  yg.cli.list(argv);
 })
 
 .command('cli-check <parserName>', '检查编译器是否存在或正常工作', noop, (argv) => {
-  const nmparser = require('../lib/nmparser');
-  nmparser.check(argv);
+  yg.cli.check(argv);
 })
 
 .command('cli-freeze <parserName>', '固化当前使用的环境为新编译器', function (yargs) {
@@ -54,25 +49,21 @@ const exec = yargs
     type: 'boolean'
   });
 }, (argv) => {
-  const nmparser = require('../lib/nmparser');
-  nmparser.freeze(argv);
+  yg.cli.freeze(argv);
 })
 
 .command('cli-use <parserName>', '当前工程切换编译器', noop, (argv) => {
-  const init = require('../lib/init');
-  init.init(argv);
+  yg.init(argv);
 })
 
 .command('cli-remove', '清除当前工程的编译器', noop, (argv) => {
-  const nmparser = require('../lib/nmparser');
-  nmparser.remove(argv);
+  yg.cli.remove(argv);
 })
 
 .command('template <options>', '脚手架模板管理', function (yargs) {
   yargs.reset()
     .command('clone <name>', '使用指定脚手架模板作为项目模板', noop, (argv) => {
-      const template = require('../lib/template');
-      template.clone(argv);
+      yg.template.clone(argv);
     })
     .command('upload', '上传脚手架', function (yargs) {
       yargs.reset()
@@ -97,29 +88,16 @@ const exec = yargs
         describe: '查看所有脚手架'
       });
     }, (argv) => {
-      const template = require('../lib/template');
-      template.list(argv);
+      yg.template.list(argv);
     });
 })
 
 .command('connect [ip]', '切换云服务器，不输入ip则查看当前连接的云服务器', noop, (argv) => {
-  const fs = require('fs');
-  const path = require('path');
-  const ygconfig = require('../lib/ygconfig')(argv).ygconfig;
-  const ygconfigFile = path.resolve(argv.dirname, '.ygconfig');
-  if (argv.ip) {
-    // todo 校验ip或域名的合法性
-    ygconfig.domain = argv.ip;
-    fs.writeFileSync(ygconfigFile, JSON.stringify(ygconfig, null, 2));
-    console.log('新连接的云服务地址为：', argv.ip);
-  } else {
-    console.log('当前云服务地址为：', ygconfig.domain);
-  }
+  yg.connect(argv)
 })
 
 .command('clean', '清除服务端的缓存文件', noop, (argv) => {
-  const clean = require('../lib/clean');
-  clean.clean(argv);
+  yg.clean(argv);
 })
 
 .usage('Usage: yg <command> [options]')
