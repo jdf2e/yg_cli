@@ -39,10 +39,7 @@ module.exports.cli = {
     },
     remove(argv){ // 清除当前工程的编译器
         nmparser.remove(argv);
-    },
-    list(argv){
-
-    },
+    }
 }
 
 // 脚手架模板管理

@@ -31,8 +31,17 @@
 
 // const argv = require('yargs')
 // .default('dirname', process.cwd())
-// .command('build', '编译并下载编译后的文件到本地dist目录', function(){}, function (argv) {
+// .command('cli-list', '编译并下载编译后的文件到本地dist目录', function(){}, function (argv) {
 //     console.info('build',argv)
+//     let args = []
+//     for ( let k in argv) {
+//       if ( !/(^\$|\b_\b|\bdirname\b)/.test(k)) {
+//         args.push(`--${k} ${argv[k]}`)
+//       }
+//     }
+//     args.push('--unsafe-perm')
+//     args = argv._.concat(args)
+//     console.info(args.join(' '))
 //   })
 //   .command('abc', 'ABC', function(argv){
 //     argv.reset()
@@ -42,9 +51,10 @@
 //       type: 'boolean'
 //     });
 //   }, function (argv) {
-//     console.info('abc', argv)
+//     console.info('===', argv)
+    
 //   })
 //   .argv
 
-// const yg = require('../index')
-// yg.start({dirname:'d:/test'})
+const yg = require('../index')
+yg.cli.list()
