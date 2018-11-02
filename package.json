@@ -1,8 +1,8 @@
 {
-  "name": "yg",
-  "version": "1.2.2",
+  "name": "yg-cli",
+  "version": "1.2.1",
   "bin": {
-    "ygt": "./bin/cli.js"
+    "yg": "./bin/cli.js"
   },
   "description": "yg-cli\r ====\r yg-cli",
   "main": "index.js",
