@@ -13,7 +13,13 @@ module.exports.build = (argv)=>{
 
 // 启动web服务，热更新开发，映射到npm run dev
 module.exports.start = (argv)=>{
-    start.start(argv);
+    return new Promise((res, rej)=>{
+        start.start(argv).then((data)=>{
+            res(data)
+        }).catch((error)=>{
+            rej(error)
+        })
+    })
 }
 
 // 中转npm scripts命令
@@ -24,7 +30,13 @@ module.exports.npm = (argv)=>{
 // 初始化工程，生成.ygconfig
 // 或切换当前工程编译器
 module.exports.init = (argv)=>{
-    init.init(argv);
+    return new Promise((res, rej)=>{
+        init.init(argv).then(()=>{
+            res()
+        }).catch(()=>{
+            rej()
+        })
+    })
 }
 
 module.exports.cli = {
