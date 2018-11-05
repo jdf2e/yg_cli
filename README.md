@@ -24,6 +24,10 @@
 ```
   * 打开浏览输入 http://yg.jd.com:端口号 即可预览
 
+  * 支持 program api
+```
+  const yg = require('yg-cli/index')
+```  
 ## 更多操作
     详见 yg -h
     

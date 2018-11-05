@@ -1,6 +1,6 @@
 {
   "name": "yg-cli",
-  "version": "1.2.3",
+  "version": "1.2.5",
   "bin": {
     "yg": "./bin/cli.js"
   },
@@ -11,13 +11,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://source.jd.com/app/yg-cli.git"
+    "url": "https://github.com/jdf2e/yg_cli.git"
   },
   "engines": {
     "node": ">=8.11.3"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "commander": "^2.15.1",
     "inquirer": "^6.2.0",
