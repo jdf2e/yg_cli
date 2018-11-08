@@ -10,12 +10,19 @@ function checkMiddleware(argv) {
 
 const exec = yargs
 .default('dirname', process.cwd())
-
 .command('build', '编译并下载编译后的文件到本地dist目录', noop, function (argv) {
   yg.build(argv);
 }, [checkMiddleware])
 
-.command('start', '启动web服务，热更新开发，映射到npm run dev', noop, (argv) => {
+.command('start', '启动web服务，热更新开发，映射到npm run dev', function (yargs) {
+  yargs.reset()
+  .options('open', {
+    alias: 'o',
+    describe: '打开浏览器',
+    type: 'boolean',
+    default:true
+  });
+}, (argv) => {
   yg.start(argv);
 })
 

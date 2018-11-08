@@ -57,13 +57,14 @@
 //   .argv
 
 const yg = require('../index')
-yg.npm({
-  dirname:'F:\\workspace\\vscode\\react-butler-demo',
-  _:['npm','i']
-})
-// yg.start({
-//   dirname:'F:\\workspace\\vscode\\react-butler-demo'
+// yg.npm({
+//   dirname:'F:\\workspace\\vscode\\react-butler-demo',
+//   _:['npm','i']
 // })
+yg.start({
+  dirname:'F:\\workspace\\vscode\\react-butler-demo',
+  open:true
+})
 // yg.init({
 //   dirname:'C:\\Users\\wuyaoheng\\AppData\\Roaming\\snoobe\\Temp\\12623',
 //   parserName:'vue-nutui'
