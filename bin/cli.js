@@ -23,6 +23,11 @@ const exec = yargs
   yg.npm(argv);
 })
 
+.command('cmd', '高级指令', noop, (argv) => {
+  argv._.shift()
+  yg.cmd(argv);
+})
+
 .command('init <parserName>', '初始化工程，生成.ygconfig', noop, (argv) => {
   yg.init(argv);
 })

@@ -1,6 +1,7 @@
 const build = require('./lib/build');
 const start = require('./lib/start');
 const npm = require('./lib/npm');
+const cmd = require('./lib/cmd');
 const init = require('./lib/init');
 const nmparser = require('./lib/nmparser');
 const template = require('./lib/template');
@@ -26,6 +27,12 @@ module.exports.start = (argv)=>{
 module.exports.npm = (argv)=>{
     npm.exec(argv);
 }
+
+// 中转cmd命令
+module.exports.cmd = (argv)=>{
+    cmd.exec(argv);
+}
+
 
 // 初始化工程，生成.ygconfig
 // 或切换当前工程编译器

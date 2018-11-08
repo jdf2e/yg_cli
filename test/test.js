@@ -57,4 +57,25 @@
 //   .argv
 
 const yg = require('../index')
-yg.cli.list()
+yg.npm({
+  dirname:'F:\\workspace\\vscode\\react-butler-demo',
+  _:['npm','i']
+})
+// yg.start({
+//   dirname:'F:\\workspace\\vscode\\react-butler-demo'
+// })
+// yg.init({
+//   dirname:'C:\\Users\\wuyaoheng\\AppData\\Roaming\\snoobe\\Temp\\12623',
+//   parserName:'vue-nutui'
+// }).then(()=>{
+//   console.info('ok')
+
+//   yg.start({
+//     dirname:'C:\\Users\\wuyaoheng\\AppData\\Roaming\\snoobe\\Temp\\12623',
+//   }).then((data)=>{
+//     console.info('>>>>>>>>>>>>>>>>>',data)
+//   })
+// }).catch(()=>{
+//   console.info('error')
+// })
+// console.info(!!process.stdin)
