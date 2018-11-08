@@ -1,6 +1,6 @@
 {
   "name": "yg-cli",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "bin": {
     "yg": "./bin/cli.js"
   },
